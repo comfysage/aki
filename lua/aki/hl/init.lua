@@ -37,6 +37,7 @@ function M.setup(theme)
 
     Error = { theme.sakura },
     ErrorMsg = { link = "Error" },
+    WarningMsg = { link = "Error" },
     MoreMsg = { theme.bg3 },
     ModeMsg = { theme.bg2, theme.none },
 
