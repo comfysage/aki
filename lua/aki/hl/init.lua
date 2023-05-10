@@ -47,6 +47,8 @@ function M.setup(theme)
 
     PreProc = { theme.shinme },
 
+    Directory = { link = "Constant" },
+
     Underlined = { theme.none, theme.none },
 
     -- Treesitter
