@@ -32,6 +32,8 @@ function M.setup(theme)
     TabLineFill = { link = 'TabLine' },
     Title = { theme.bg2 },
     NonText = { theme.bg2, theme.none },
+    Folded = { theme.bg4 },
+    FoldColumn = { theme.bg1 },
 
     Search = { theme.sakaeru },
 
