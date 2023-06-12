@@ -261,6 +261,10 @@ function M.setup(theme, config)
   hl_groups['TelescopeResultsBorder'] = { link = "TelescopeBorder" }
   hl_groups['TelescopePreviewBorder'] = { link = "TelescopeBorder" }
 
+  if config.override_terminal then
+    require 'aki.hl.terminal'(theme, theme.colors)
+  end
+
   return hl_groups
 end
 

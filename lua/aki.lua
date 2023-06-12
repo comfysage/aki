@@ -2,11 +2,13 @@ local aki = {}
 
 ---@class AkiConfig
 ---@field transparent_background boolean
+---@field override_terminal boolean
 ---@field style { [styleField]: styleValue }
 
 ---@type AkiConfig
 aki.default_config = {
     transparent_background = false,
+    override_terminal = true,
     style = {
         search = { reverse = true },
     },

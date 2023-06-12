@@ -1,0 +1,20 @@
+---@param theme AkiTheme
+---@param colors AkiColors
+return function(theme, colors)
+  vim.g.terminal_color_0  = theme.bg1[1]
+  vim.g.terminal_color_8  = theme.bg0[1]
+  vim.g.terminal_color_1  = theme.fg0[1]
+  vim.g.terminal_color_9  = theme.fg1[1]
+  vim.g.terminal_color_2 = colors.shinme['1'][1]
+  vim.g.terminal_color_10  = colors.shinme['2'][1]
+  vim.g.terminal_color_3 = colors.sakaeru['1'][1]
+  vim.g.terminal_color_11  = colors.sakaeru['2'][1]
+  vim.g.terminal_color_4 = colors.sukai['1'][1]
+  vim.g.terminal_color_12  = colors.sukai['2'][1]
+  vim.g.terminal_color_5 = colors.seiun['1'][1]
+  vim.g.terminal_color_13  = colors.seiun['2'][1]
+  vim.g.terminal_color_6 = colors.sage['1'][1]
+  vim.g.terminal_color_14  = colors.sage['2'][1]
+  vim.g.terminal_color_7 = theme.bg3[1]
+  vim.g.terminal_color_15  = theme.bg4[1]
+end
