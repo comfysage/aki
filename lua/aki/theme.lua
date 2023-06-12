@@ -37,7 +37,7 @@ function M.setup(colors, config)
   theme.none    = { 'NONE', 0 }
 
   theme.bg      = config.transparent_background and theme.none or colors.bg['0']
-  theme.fg      = colors.sage['0']
+  theme.fg      = colors.fg['0']
 
   theme.bg0     = colors.bg['0']
   theme.bg1     = colors.bg['1']
@@ -45,11 +45,11 @@ function M.setup(colors, config)
   theme.bg3     = colors.bg['3']
   theme.bg4     = colors.bg['4']
 
-  theme.fg0     = colors.sage['0']
-  theme.fg1     = colors.sage['1']
-  theme.fg2     = colors.sage['2']
-  theme.fg3     = colors.sukai['2']
-  theme.fg4     = colors.sukai['1']
+  theme.fg0     = colors.fg['0']
+  theme.fg1     = colors.fg['1']
+  theme.fg2     = colors.fg['2']
+  theme.fg3     = colors.fg['3']
+  theme.fg4     = colors.fg['4']
 
   theme.comment = theme.bg3
 
@@ -63,7 +63,7 @@ function M.setup(colors, config)
 
   theme.syntax  = {
     keyword = theme.seiun,
-    object = colors.sakaeru['0'],
+    object = theme.fg1,
     type = theme.sakaeru,
     context = theme.bg3,
     constant = theme.seiun,
