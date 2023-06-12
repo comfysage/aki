@@ -3,7 +3,8 @@ local M = {}
 ---@alias ColorSpec { [1]: Color, [2]: Color, link: string, reverse: boolean }
 
 ---@param theme AkiTheme
-function M.setup(theme)
+---@param config AkiConfig
+function M.setup(theme, config)
   ---@type { [string]: ColorSpec }
   local hl_groups = {
     Normal = { theme.fg, theme.bg },

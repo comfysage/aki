@@ -56,7 +56,7 @@ function aki.load(_)
     end
 
     local theme = require 'aki.colors'.setup()
-    local hlgroups = require 'aki.hl.init'.setup(theme)
+    local hlgroups = require 'aki.hl.init'.setup(theme, _G.aki_config)
 
     set_highlights(hlgroups)
 end
