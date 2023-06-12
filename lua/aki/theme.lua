@@ -3,6 +3,7 @@
 
 ---@class AkiTheme
 ---@field none Color
+---@field colors AkiColors
 ---@field bg Color
 ---@field fg Color
 ---@field bg0 Color
@@ -35,6 +36,7 @@ function M.setup(colors, config)
   local theme   = {}
 
   theme.none    = { 'NONE', 0 }
+  theme.colors  = colors
 
   theme.bg      = config.transparent_background and theme.none or colors.bg['0']
   theme.fg      = colors.fg['0']
