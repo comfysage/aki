@@ -22,7 +22,7 @@
 ---@field sakaeru Color
 ---@field seiun   Color
 ---@field ike     Color
----@field syntax { keyword: Color, object: Color, type: Color, context: Color, constant: Color }
+---@field syntax { keyword: Color, object: Color, type: Color, context: Color, constant: Color, call: Color }
 ---@field style { [styleField]: styleValue }
 ---@field comment Color
 
@@ -67,6 +67,7 @@ function M.setup(colors, config)
     type = theme.sakaeru,
     context = theme.bg3,
     constant = theme.seiun,
+    call = theme.ike,
   }
 
   theme.style = {
