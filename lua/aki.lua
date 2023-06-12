@@ -4,6 +4,7 @@ local aki = {}
 ---@field transparent_background boolean
 ---@field override_terminal boolean
 ---@field style { [styleField]: styleValue }
+---@field overrides HLGroups
 
 ---@type AkiConfig
 aki.default_config = {
@@ -12,6 +13,7 @@ aki.default_config = {
     style = {
         search = { reverse = true },
     },
+    overrides = {},
 }
 
 _G.aki_config = _G.aki_config or aki.default_config

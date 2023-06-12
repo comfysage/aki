@@ -265,6 +265,13 @@ function M.setup(theme, config)
     require 'aki.hl.terminal'(theme, theme.colors)
   end
 
+  for hl, override in pairs(config.overrides or {}) do
+    if hl_groups[hl] and not vim.tbl_isempty(override) then
+      hl_groups[hl].link = nil
+    end
+    hl_groups[hl] = vim.tbl_deep_extend("force", hl_groups[hl] or {}, override)
+  end
+
   return hl_groups
 end
 
