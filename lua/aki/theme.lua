@@ -38,7 +38,16 @@ function M.setup(colors, config)
   theme.none    = { 'NONE', 0 }
   theme.colors  = colors
 
-  theme.bg      = config.transparent_background and theme.none or colors.bg['0']
+  theme.bg      = theme.none
+  if not config.transparent_background then
+    theme.bg = colors.bg['0']
+    if config.contrast_dark == 'high' then
+      theme.bg = colors.bg['0_hard']
+    end
+    if config.contrast_dark == 'soft' then
+      theme.bg = colors.bg['0_soft']
+    end
+  end
   theme.fg      = colors.fg['0']
 
   theme.bg0     = colors.bg['0']
