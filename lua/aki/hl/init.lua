@@ -24,6 +24,8 @@ function M.setup(theme, config)
     Constant = { theme.syntax.constant },
     String = { theme.shinme },
 
+    Cursor = { theme.sakaeru },
+
     LineNr = { theme.bg2 },
     CursorLineNr = { theme.bg3 },
     SignColumn = { theme.none, theme.bg },
