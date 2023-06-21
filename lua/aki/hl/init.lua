@@ -269,6 +269,12 @@ function M.setup(theme, config)
   hl_groups['TelescopeResultsBorder'] = { link = "TelescopeBorder" }
   hl_groups['TelescopePreviewBorder'] = { link = "TelescopeBorder" }
 
+  -- GitSigns
+  hl_groups['GitGutterAdd']    = { link = "DiffAdd" }
+  hl_groups['GitGutterChange'] = { link = "DiffChange" }
+  hl_groups['GitGutterDelete'] = { link = "DiffDelete" }
+  hl_groups['GitGutterChangeDelete'] = { link = 'GitGutterChange' }
+
   if config.override_terminal then
     require 'aki.hl.terminal'(theme, theme.colors)
   end
