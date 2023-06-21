@@ -11,14 +11,14 @@ function M.setup(theme, config)
     Statement = { theme.syntax.keyword },
     Identifier = { theme.syntax.object },
     Type = { theme.syntax.type },
-    Function = { theme.shinme },
+    Function = { theme.syntax.call },
     Structure = { theme.ike },
 
     Comment = { theme.comment },
 
     Special = { theme.syntax.context },
     Delimiter = { theme.syntax.context },
-    Operator = { theme.bg3 },
+    Operator = { theme.syntax.context },
     MatchParen = { theme.sukai },
 
     Constant = { theme.syntax.constant },
@@ -27,15 +27,15 @@ function M.setup(theme, config)
     Cursor = { theme.sakaeru },
 
     LineNr = { theme.bg2 },
-    CursorLineNr = { theme.bg3 },
+    CursorLineNr = { theme.comment },
     SignColumn = { theme.none, theme.bg },
-    VertSplit = { theme.bg3 },
+    VertSplit = { theme.bg2 },
     TabLineSel = { theme.bg, theme.seiun },
-    TabLine = { theme.bg3, theme.bg },
+    TabLine = { theme.comment, theme.bg },
     TabLineFill = { link = 'TabLine' },
-    Title = { theme.bg2 },
+    Title = { theme.comment },
     NonText = { theme.bg2, theme.none },
-    Folded = { theme.bg4 },
+    Folded = { theme.comment },
     FoldColumn = { theme.bg1 },
 
     Search = { theme.sakaeru },
@@ -43,7 +43,7 @@ function M.setup(theme, config)
     Error = { theme.sakura },
     ErrorMsg = { link = "Error" },
     WarningMsg = { link = "Error" },
-    MoreMsg = { theme.bg3 },
+    MoreMsg = { theme.comment },
     ModeMsg = { theme.bg2, theme.none },
 
     ColorColumn = { theme.none, theme.bg1 },
@@ -93,7 +93,7 @@ function M.setup(theme, config)
     TSParameter          = { link = "Identifier" },
     TSParameterReference = { link = "TSParameter" },
     TSProperty           = { theme.syntax.object },
-    TSPunctBracket       = { theme.bg4 },
+    TSPunctBracket       = { theme.syntax.context },
     TSPunctDelimiter     = { link = "Delimiter" },
     TSPunctSpecial       = { link = "Special" },
     TSRepeat             = { link = "Repeat" },
@@ -105,7 +105,7 @@ function M.setup(theme, config)
     TSTag                = { link = "Tag" },
     TSTagDelimiter       = { theme.fg1 },
     TSText               = { theme.fg1 },
-    TSStrike             = { theme.bg4 },
+    TSStrike             = { theme.fg2 },
     TSMath               = { theme.sukai },
     TSType               = { link = "Type" },
     TSTypeBuiltin        = { link = "Type" },
@@ -117,7 +117,7 @@ function M.setup(theme, config)
     Pmenu = { theme.fg1, theme.bg2 },
     PmenuSel = { theme.bg2, theme.shinme, reverse = theme.style.search.reverse },
     PmenuSbar = { theme.none, theme.bg2 },
-    PmenuThumb = { theme.none, theme.bg4 },
+    PmenuThumb = { theme.none, theme.fg2 },
 
     -- Diffs
     DiffDelete = { theme.sakura, theme.bg0 },
