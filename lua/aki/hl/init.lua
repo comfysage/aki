@@ -120,10 +120,10 @@ function M.setup(theme, config)
     PmenuThumb = { theme.none, theme.fg2 },
 
     -- Diffs
-    DiffDelete = { theme.sakura, theme.bg0 },
-    DiffAdd = { theme.shinme, theme.bg0 },
-    DiffChange = { theme.sage, theme.bg0 },
-    DiffText = { theme.fg, theme.bg0 },
+    DiffDelete = { theme.sakura, theme.bg },
+    DiffAdd = { theme.shinme, theme.bg },
+    DiffChange = { theme.ike, theme.bg },
+    DiffText = { theme.fg, theme.bg },
 
     -- Spell
     SpellCap   = { theme.shinme },
