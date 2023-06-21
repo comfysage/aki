@@ -7,7 +7,7 @@ local colors = {
 
   fg0 = theme.fg0[1],
   fg1 = theme.fg1[1],
-  bg0 = theme.bg0[1],
+  bg0 = theme.bg[1],
   bg1 = theme.bg1[1],
   bg2 = theme.bg2[1],
 }
