@@ -10,12 +10,9 @@
 ---@field bg1 Color
 ---@field bg2 Color
 ---@field bg3 Color
----@field bg4 Color
 ---@field fg0 Color
 ---@field fg1 Color
 ---@field fg2 Color
----@field fg3 Color
----@field fg4 Color
 ---@field sakura  Color
 ---@field sage    Color
 ---@field sukai   Color
@@ -54,13 +51,10 @@ function M.setup(colors, config)
   theme.bg1     = colors.bg['1']
   theme.bg2     = colors.bg['2']
   theme.bg3     = colors.bg['3']
-  theme.bg4     = colors.bg['4']
 
   theme.fg0     = colors.fg['0']
   theme.fg1     = colors.fg['1']
   theme.fg2     = colors.fg['2']
-  theme.fg3     = colors.fg['3']
-  theme.fg4     = colors.fg['4']
 
   theme.comment = theme.bg3
 
