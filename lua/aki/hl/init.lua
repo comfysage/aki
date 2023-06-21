@@ -257,6 +257,8 @@ function M.setup(theme, config)
   -- lsp
   hl_groups['@lsp.type.namespace'] = { link = "TSNamespace" }
 
+  hl_groups['@lsp.type.macro.rust'] = { theme.syntax.call }
+
   -- Telescope
   hl_groups['TelescopeMatching']       = { link = "Search" }
   hl_groups['TelescopeSelection']      = { link = "Identifier" }
