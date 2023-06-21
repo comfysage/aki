@@ -124,6 +124,12 @@ function M.setup(theme, config)
     DiffAdd = { theme.shinme, theme.bg },
     DiffChange = { theme.ike, theme.bg },
     DiffText = { theme.fg, theme.bg },
+    diffAdded   = { link = 'DiffAdd' },
+    diffRemoved = { link = 'DiffDelete' },
+    diffChanged = { link = 'DiffChange' },
+    diffFile    = { theme.syntax.object },
+    diffNewFile = { theme.syntax.object },
+    diffLine    = { theme.syntax.context },
 
     -- Spell
     SpellCap   = { theme.shinme },
