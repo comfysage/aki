@@ -48,7 +48,7 @@ function M.setup(theme, config)
 
     ColorColumn = { theme.none, theme.bg1 },
 
-    Todo = { theme.bg, theme.shinme },
+    Todo = { theme.bg, theme.seiun },
 
     PreProc = { theme.shinme },
 
