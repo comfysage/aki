@@ -261,7 +261,7 @@ function M.setup(theme, config)
   hl_groups['TelescopeMatching']       = { link = "Search" }
   hl_groups['TelescopeSelection']      = { link = "Identifier" }
   hl_groups['TelescopePromptPrefix']   = { link = "Constant" }
-  hl_groups['TelescopeNormal']         = { theme.bg4 }
+  hl_groups['TelescopeNormal']         = { theme.syntax.context }
   hl_groups['TelescopeSelectionCaret'] = { link = "TelescopeNormal" }
 
   hl_groups['TelescopeBorder']        = { theme.bg2 }
