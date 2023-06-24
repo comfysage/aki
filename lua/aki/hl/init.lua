@@ -83,7 +83,7 @@ function M.setup(theme, config)
     TSInclude            = { link = "Include" },
     TSKeyword            = { link = "Keyword" },
     TSKeywordFunction    = { link = "Keyword" },
-    TSKeywordOperator    = { theme.sakaeru },
+    TSKeywordOperator    = { theme.taiyo },
     TSLabel              = { link = "Label" },
     TSMethod             = { theme.syntax.context },
     TSNamespace          = { link = "Constant" },

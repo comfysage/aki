@@ -18,6 +18,7 @@
 ---@field sukai   Color
 ---@field shinme  Color
 ---@field sakaeru Color
+---@field taiyo Color
 ---@field seiun   Color
 ---@field ike     Color
 ---@field syntax { keyword: Color, object: Color, type: Color, context: Color, constant: Color, call: Color }
@@ -58,16 +59,17 @@ function M.setup(colors, config)
 
   theme.comment = theme.bg3
 
-  theme.sakura  = colors.sakura['1']
-  theme.sage    = colors.sage['1']
-  theme.sukai   = colors.sukai['1']
-  theme.shinme  = colors.shinme['1']
-  theme.sakaeru = colors.sakaeru['1']
-  theme.seiun   = colors.seiun['1']
-  theme.ike   = colors.ike['1']
+  theme.sakaeru = colors.sakura['0']
+  theme.taiyo   = colors.sakura['1']
+  theme.sakura  = colors.sakura['2']
+  theme.seiun   = colors.kumo['2']
+  theme.sukai   = colors.ike['0']
+  theme.sage    = colors.ike['1']
+  theme.ike     = colors.ike['2']
+  theme.shinme  = colors.ike['3']
 
   theme.syntax  = {
-    keyword = theme.seiun,
+    keyword = theme.sakura,
     object = theme.fg1,
     type = theme.sakaeru,
     context = theme.bg3,
