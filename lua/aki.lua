@@ -2,7 +2,7 @@ local aki = {}
 
 ---@class AkiConfig
 ---@field transparent_background boolean
----@field contrast_dark 'high'|'mid'|'soft'
+---@field contrast_dark 'hard'|'medium'|'soft'
 ---@field override_terminal boolean
 ---@field style { [styleField]: styleValue }
 ---@field overrides HLGroups
@@ -10,7 +10,7 @@ local aki = {}
 ---@type AkiConfig
 aki.default_config = {
     transparent_background = false,
-    contrast_dark = 'mid',
+    contrast_dark = 'medium',
     override_terminal = true,
     style = {
         search = { reverse = true },
