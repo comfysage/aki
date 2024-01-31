@@ -1,84 +1,124 @@
----@alias styleField 'search'
----@alias styleValue { reverse: boolean }
+---@class aki.types.StyleConfig
+---@field tabline { reverse: boolean, color: aki.types.ColorField }
+---@field search { reverse: boolean, inc_reverse: boolean }
+---@field types { italic: boolean }
+---@field keyword { italic: boolean }
+---@field comment { italic: boolean }
 
----@class AkiTheme
----@field none Color
----@field colors AkiColors
----@field bg Color
----@field fg Color
----@field bg0 Color
----@field bg1 Color
----@field bg2 Color
----@field bg3 Color
----@field fg0 Color
----@field fg1 Color
----@field fg2 Color
----@field sakura  Color
----@field sage    Color
----@field sukai   Color
----@field shinme  Color
----@field sakaeru Color
----@field taiyo Color
----@field seiun   Color
----@field ike     Color
----@field syntax { keyword: Color, object: Color, type: Color, context: Color, constant: Color, call: Color }
----@field style { [styleField]: styleValue }
----@field comment Color
+---@class aki.types.Theme
+---@field none aki.types.Color
+---@field colors aki.types.Colors
+---@field base { fg: aki.types.Color, bg: aki.types.Color }
+---@field bg aki.types.Color
+---@field fg aki.types.Color
+---@field bg0 aki.types.Color
+---@field bg1 aki.types.Color
+---@field bg2 aki.types.Color
+---@field bg3 aki.types.Color
+---@field fg0 aki.types.Color
+---@field fg1 aki.types.Color
+---@field fg2 aki.types.Color
+---@field red  aki.types.Color
+---@field yellow aki.types.Color
+---@field orange aki.types.Color
+---@field green aki.types.Color
+---@field aqua aki.types.Color
+---@field blue aki.types.Color
+---@field purple aki.types.Color
+---@field syntax aki.types.Syntax
+---@field diagnostic { ['ok'|'error'|'warn'|'info'|'hint']: aki.types.Color }
+---@field diff { ['add'|'delete'|'change']: aki.types.Color }
+---@field style aki.types.StyleConfig
+---@field sign aki.types.Color
+---@field comment aki.types.Color
+---@field bg_accent aki.types.Color
+
+---@class aki.types.Syntax
+---@field keyword aki.types.Color
+---@field object aki.types.Color
+---@field field aki.types.Color
+---@field type aki.types.Color
+---@field context aki.types.Color
+---@field bracket aki.types.Color
+---@field constant aki.types.Color
+---@field call aki.types.Color
+---@field string aki.types.Color
+---@field macro aki.types.Color
+---@field annotation aki.types.Color
 
 local M = {}
 
----@param colors AkiColors
----@param config AkiConfig
----@return AkiTheme
+---@param colors aki.types.Colors
+---@param config aki.types.Config
+---@return aki.types.Theme
 function M.setup(colors, config)
-  local theme   = {}
+  local theme = {}
 
-  theme.none    = { 'NONE', 0 }
-  theme.colors  = colors
+  theme.none = { 'NONE', 0 }
+  theme.colors = colors
 
-  theme.bg      = theme.none
+  theme.bg = theme.none
+  local bg_c = {
+    hard = colors.bg0_hard,
+    medium = colors.bg0,
+    soft = colors.bg0_soft,
+  }
   if not config.transparent_background then
-    theme.bg = colors.bg['0']
-    if config.contrast_dark == 'hard' then
-      theme.bg = colors.bg['0_hard']
-    end
-    if config.contrast_dark == 'soft' then
-      theme.bg = colors.bg['0_soft']
-    end
+    theme.bg = bg_c[config.theme] or colors.bg0
   end
-  theme.fg      = colors.fg['0']
+  theme.base = { fg = colors.bg0, bg = theme.bg }
+  theme.fg = colors.fg0
 
-  theme.bg0     = colors.bg['0']
-  theme.bg1     = colors.bg['1']
-  theme.bg2     = colors.bg['2']
-  theme.bg3     = colors.bg['3']
+  theme.bg0 = colors.bg0
+  theme.bg1 = colors.bg1
+  theme.bg2 = colors.bg2
+  theme.bg3 = colors.bg3
 
-  theme.fg0     = colors.fg['0']
-  theme.fg1     = colors.fg['1']
-  theme.fg2     = colors.fg['2']
+  theme.fg0 = colors.fg0
+  theme.fg1 = colors.fg1
+  theme.fg2 = colors.fg2
 
-  theme.comment = theme.bg3
+  local sign_colors = { dawn = theme.bg3 }
+  theme.sign = sign_colors[config.theme] or theme.none
+  theme.comment = colors.bg4
+  theme.bg_accent = theme.bg2
 
-  theme.sakaeru = colors.sakura['0']
-  theme.taiyo   = colors.sakura['1']
-  theme.sakura  = colors.sakura['2']
-  theme.seiun   = colors.kumo['2']
-  theme.sukai   = colors.ike['0']
-  theme.sage    = colors.ike['1']
-  theme.ike     = colors.ike['2']
-  theme.shinme  = colors.ike['3']
+  theme.red = colors.red
+  theme.orange = colors.orange
+  theme.yellow = colors.yellow
+  theme.green = colors.green
+  theme.aqua = colors.aqua
+  theme.blue = colors.blue
+  theme.purple = colors.purple
 
-  theme.syntax  = {
-    keyword = theme.sakura,
+  theme.syntax = {
+    keyword = theme.red,
     object = theme.fg1,
-    type = theme.sakaeru,
+    field = theme.colors.bg5,
+    type = theme.orange,
     context = theme.bg3,
-    constant = theme.seiun,
-    call = theme.ike,
+    bracket = theme.fg2,
+    constant = theme.purple,
+    call = theme.aqua,
+    string = theme.green,
+    macro = theme.orange,
+    annotation = theme.orange,
+  }
+  theme.diagnostic = {
+    ok = theme.green,
+    error = theme.red,
+    warn = theme.yellow,
+    info = theme.aqua,
+    hint = theme.blue,
+  }
+  theme.diff = {
+    add = theme.green,
+    delete = theme.red,
+    change = theme.aqua,
   }
 
   theme.style = {
-    search = { reverse = true }
+    search = { reverse = true },
   }
   theme.style = vim.tbl_deep_extend('force', theme.style, config.style)
 

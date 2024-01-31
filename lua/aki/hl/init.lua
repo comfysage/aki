@@ -1,71 +1,103 @@
 local M = {}
 
----@alias ColorSpec { [1]: Color, [2]: Color, link: string, reverse: boolean }
+---@alias aki.types.ColorSpec { [1]: Color, [2]: Color, link: string, reverse: boolean }
+---@alias aki.types.HLGroups { [string]: aki.types.ColorSpec }
 
----@param theme AkiTheme
----@param config AkiConfig
+---@param theme aki.types.Theme
+---@param config aki.types.Config
 function M.setup(theme, config)
-  ---@type { [string]: ColorSpec }
+  ---@type aki.types.HLGroups
   local hl_groups = {
     Normal = { theme.fg, theme.bg },
     Statement = { theme.syntax.keyword },
+    Keyword = { theme.syntax.keyword, italic = config.style.keyword.italic },
     Identifier = { theme.syntax.object },
-    Type = { theme.syntax.type },
+    Type = { theme.syntax.type, italic = config.style.types.italic },
     Function = { theme.syntax.call },
-    Structure = { theme.ike },
+    Structure = { theme.syntax.type },
 
-    Comment = { theme.comment },
+    Comment = { theme.comment, italic = config.style.comment.italic },
 
     Special = { theme.syntax.context },
     Delimiter = { theme.syntax.context },
     Operator = { theme.syntax.context },
-    MatchParen = { theme.sukai },
+    MatchParen = { theme.orange },
 
     Constant = { theme.syntax.constant },
-    String = { theme.shinme },
+    String = { theme.syntax.string },
 
-    Cursor = { theme.sakaeru },
+    Cursor = { theme.yellow },
+    CursorLine   = { theme.none, theme.bg1 },
+    CursorColumn = { theme.none, theme.bg1 },
+    QuickFixLine = { theme.none, theme.bg1 },
+
+    Visual = { theme.none, theme.bg3 },
 
     LineNr = { theme.bg2 },
     CursorLineNr = { theme.comment },
-    SignColumn = { theme.none, theme.bg },
-    VertSplit = { theme.bg2 },
-    TabLineSel = { theme.bg, theme.seiun },
-    TabLine = { theme.comment, theme.bg },
+    SignColumn = { theme.none, theme.sign },
+    WinSeparator = { theme.bg1 },
+    VertSplit    = { link = "WinSeparator" },
+    TabLineSel = config.style.tabline.reverse and { theme.base.fg, theme.colors[config.style.tabline.color] } or { theme.colors[config.style.tabline.color], theme.base.bg },
+    TabLine = { theme.comment, theme.bg1 },
     TabLineFill = { link = 'TabLine' },
     Title = { theme.comment },
     NonText = { theme.bg2, theme.none },
     Folded = { theme.comment },
     FoldColumn = { theme.bg1 },
 
-    Search = { theme.sakaeru },
+    NormalFloat        = { theme.fg, theme.bg },
+    FloatBorder        = { theme.bg2 },
+    StatusLine         = { theme.fg2, theme.none },
+    StatusLineNC       = { theme.fg2, theme.bg1 },
+    FloatShadow        = { theme.none, theme.none },
+    FloatShadowThrough = { theme.none, theme.none },
 
-    Error = { theme.sakura },
-    ErrorMsg = { link = "Error" },
-    WarningMsg = { link = "Error" },
+    OkText       = { theme.diagnostic.ok,    theme.none      },
+    ErrorText    = { theme.diagnostic.error, theme.none      },
+    WarningText  = { theme.diagnostic.warn,  theme.none      },
+    InfoText     = { theme.diagnostic.info,  theme.none      },
+    HintText     = { theme.diagnostic.hint,  theme.none      },
+    OkFloat      = { theme.diagnostic.ok,    theme.bg_accent },
+    ErrorFloat   = { theme.diagnostic.error, theme.bg_accent },
+    WarningFloat = { theme.diagnostic.warn,  theme.bg_accent },
+    InfoFloat    = { theme.diagnostic.info,  theme.bg_accent },
+    HintFloat    = { theme.diagnostic.hint,  theme.bg_accent },
+
+    Question = { theme.comment },
+
+    Search = { theme.orange, reverse = config.style.search.reverse },
+    IncSearch = { theme.orange, reverse = config.style.search.inc_reverse },
+
+    Error      = { theme.diagnostic.error },
+    ErrorMsg   = { link = "Error" },
+    WarningMsg = { theme.diagnostic.warn },
     MoreMsg = { theme.comment },
     ModeMsg = { theme.bg2, theme.none },
 
     ColorColumn = { theme.none, theme.bg1 },
 
-    Todo = { theme.bg, theme.seiun },
+    Todo = { theme.base.fg, theme.purple },
 
-    PreProc = { theme.shinme },
+    PreProc = { theme.syntax.annotation },
+    Include = { theme.syntax.annotation },
 
-    Directory = { link = "Constant" },
+    Directory = { theme.blue },
+
+    Conceal = { theme.bg3 },
 
     Underlined = { theme.none, theme.none },
 
     -- Treesitter
-    --[[ TSStrong    = { theme.none, theme.none, bold = theme.bold.general },
-    TSEmphasis  = { theme.none, theme.none, italic = theme.italic.general },
-    TSUnderline = { theme.none, theme.none, underline = theme.underline.general },
-    TSNote      = { theme.blue, theme.bg0, bold = theme.bold.general },
-    TSWarning   = { theme.yellow, theme.bg0, bold = theme.bold.general },
-    TSDanger    = { theme.red, theme.bg0, bold = theme.bold.general }, ]]
+    TSStrong    = { theme.none, theme.none, bold = true },
+    TSEmphasis  = { theme.none, theme.none, italic = true },
+    TSUnderline = { theme.none, theme.none, underline = true },
+    TSNote      = { link = 'Todo' },
+    TSWarning   = { link = 'DiagnosticWarn' },
+    TSDanger    = { link = 'DiagnosticWarn' },
 
-    TSAnnotation         = { theme.seiun },
-    TSAttribute          = { theme.seiun },
+    TSAnnotation         = { theme.purple },
+    TSAttribute          = { theme.purple },
     TSBoolean            = { link = "Boolean" },
     TSCharacter          = { link = "Character" },
     TSComment            = { link = "Comment" },
@@ -73,17 +105,17 @@ function M.setup(theme, config)
     TSConstBuiltin       = { link = "Constant" },
     TSConstMacro         = { link = "Constant" },
     TSConstant           = { link = "Constant" },
-    TSConstructor        = { theme.shinme },
+    TSConstructor        = { theme.green },
     TSException          = { link = "Exception" },
-    TSField              = { theme.syntax.object },
+    TSField              = { theme.syntax.field },
     TSFloat              = { link = "Float" },
     TSFuncBuiltin        = { link = "Constant" },
-    TSFuncMacro          = { link = "Constant" },
+    TSFuncMacro          = { theme.syntax.macro },
     TSFunction           = { link = "Function" },
     TSInclude            = { link = "Include" },
     TSKeyword            = { link = "Keyword" },
     TSKeywordFunction    = { link = "Keyword" },
-    TSKeywordOperator    = { theme.taiyo },
+    TSKeywordOperator    = { theme.fg2 },
     TSLabel              = { link = "Label" },
     TSMethod             = { theme.syntax.context },
     TSNamespace          = { link = "Constant" },
@@ -93,20 +125,20 @@ function M.setup(theme, config)
     TSParameter          = { link = "Identifier" },
     TSParameterReference = { link = "TSParameter" },
     TSProperty           = { theme.syntax.object },
-    TSPunctBracket       = { theme.syntax.context },
+    TSPunctBracket       = { theme.syntax.bracket },
     TSPunctDelimiter     = { link = "Delimiter" },
     TSPunctSpecial       = { link = "Special" },
     TSRepeat             = { link = "Repeat" },
     TSStorageClass       = { link = "StorageClass" },
     TSString             = { link = "String" },
-    TSStringEscape       = { theme.sakaeru },
-    TSStringRegex        = { theme.sakaeru },
+    TSStringEscape       = { theme.yellow },
+    TSStringRegex        = { theme.yellow },
     TSSymbol             = { theme.fg1 },
     TSTag                = { link = "Tag" },
     TSTagDelimiter       = { theme.fg1 },
     TSText               = { theme.fg1 },
     TSStrike             = { theme.fg2 },
-    TSMath               = { theme.sukai },
+    TSMath               = { theme.blue },
     TSType               = { link = "Type" },
     TSTypeBuiltin        = { link = "Type" },
     TSURI                = { link = "markdownUrl" },
@@ -115,53 +147,56 @@ function M.setup(theme, config)
 
     -- Completion Menu
     Pmenu = { theme.fg1, theme.bg2 },
-    PmenuSel = { theme.bg2, theme.shinme, reverse = theme.style.search.reverse },
+    PmenuSel = { theme.bg1, theme.orange },
     PmenuSbar = { theme.none, theme.bg2 },
     PmenuThumb = { theme.none, theme.fg2 },
 
     -- Diffs
-    DiffDelete = { theme.sakura, theme.bg },
-    DiffAdd = { theme.shinme, theme.bg },
-    DiffChange = { theme.ike, theme.bg },
-    DiffText = { theme.fg, theme.bg },
-    diffAdded   = { link = 'DiffAdd' },
-    diffRemoved = { link = 'DiffDelete' },
-    diffChanged = { link = 'DiffChange' },
+    DiffAdd    = { theme.diff.add,    theme.bg },
+    DiffDelete = { theme.diff.delete, theme.bg },
+    DiffChange = { theme.diff.change, theme.bg },
+    DiffText   = { theme.fg0, theme.bg },
+    diffAdded   = { theme.diff.add    },
+    diffRemoved = { theme.diff.delete },
+    diffChanged = { theme.diff.change },
     diffFile    = { theme.syntax.object },
     diffNewFile = { theme.syntax.object },
     diffLine    = { theme.syntax.context },
+    Added = { link = "diffAdded" },
+    Changed = { link = "diffChanged" },
+    Removed = { link = "diffRemoved" },
 
     -- Spell
-    SpellCap   = { theme.shinme },
-    SpellBad   = { theme.sage },
-    SpellLocal = { theme.sage },
-    SpellRare  = { theme.seiun },
+    SpellCap   = { theme.green },
+    SpellBad   = { theme.aqua },
+    SpellLocal = { theme.aqua },
+    SpellRare  = { theme.purple },
 
     -- Diagnostics
-    DiagnosticFloatingError              = { link = "ErrorFloat" },
-    DiagnosticFloatingWarn               = { link = "WarningFloat" },
-    DiagnosticFloatingInfo               = { link = "InfoFloat" },
-    DiagnosticFloatingHint               = { link = "HintFloat" },
-    --[[ DiagnosticError                      = { link = "AdachiRedDark" },
-    DiagnosticWarn                       = { link = "AdachiYellowDark" },
-    DiagnosticInfo                       = { link = "AdachiAquaDark" }, ]]
-    -- DiagnosticHint                       = { link = "AdachiAquaDark" },
-    DiagnosticError = { theme.sakura },
-    DiagnosticWarn = { theme.sakaeru },
-    DiagnosticInfo = { theme.sage },
-    DiagnosticHint = { theme.sukai },
+    DiagnosticFloatingError = { link = "ErrorFloat" },
+    DiagnosticFloatingWarn  = { link = "WarningFloat" },
+    DiagnosticFloatingInfo  = { link = "InfoFloat" },
+    DiagnosticFloatingHint  = { link = "HintFloat" },
+    DiagnosticFloatingOk    = { link = "OkFloat" },
+    DiagnosticOk            = { theme.diagnostic.ok    },
+    DiagnosticError         = { theme.diagnostic.error },
+    DiagnosticWarn          = { theme.diagnostic.warn  },
+    DiagnosticInfo          = { theme.diagnostic.info  },
+    DiagnosticHint          = { theme.diagnostic.hint  },
     DiagnosticVirtualTextError           = { link = "DiagnosticError" },
     DiagnosticVirtualTextWarn            = { link = "DiagnosticWarn" },
     DiagnosticVirtualTextInfo            = { link = "DiagnosticInfo" },
     DiagnosticVirtualTextHint            = { link = "DiagnosticHint" },
-    DiagnosticUnderlineError             = { link = "ErrorText" },
-    DiagnosticUnderlineWarn              = { link = "WarningText" },
-    DiagnosticUnderlineInfo              = { link = "InfoText" },
-    DiagnosticUnderlineHint              = { link = "HintText" },
-    DiagnosticSignError                  = { link = "AdachiRedSign" },
-    DiagnosticSignWarn                   = { link = "AdachiYellowSign" },
-    DiagnosticSignInfo                   = { link = "AdachiBlueSign" },
-    DiagnosticSignHint                   = { link = "AdachiGreenSign" },
+    DiagnosticUnderlineOk                = { theme.diagnostic.ok,    theme.none, underline = true },
+    DiagnosticUnderlineError             = { theme.diagnostic.error, theme.none, underline = true },
+    DiagnosticUnderlineWarn              = { theme.diagnostic.warn,  theme.none, underline = true },
+    DiagnosticUnderlineInfo              = { theme.diagnostic.info,  theme.none, underline = true },
+    DiagnosticUnderlineHint              = { theme.diagnostic.hint,  theme.none, underline = true },
+    DiagnosticSignOk                     = { theme.diagnostic.ok,    theme.sign },
+    DiagnosticSignError                  = { theme.diagnostic.error, theme.sign },
+    DiagnosticSignWarn                   = { theme.diagnostic.warn,  theme.sign },
+    DiagnosticSignInfo                   = { theme.diagnostic.info,  theme.sign },
+    DiagnosticSignHint                   = { theme.diagnostic.hint,  theme.sign },
     LspDiagnosticsFloatingError          = { link = "DiagnosticFloatingError" },
     LspDiagnosticsFloatingWarning        = { link = "DiagnosticFloatingWarn" },
     LspDiagnosticsFloatingInformation    = { link = "DiagnosticFloatingInfo" },
@@ -189,8 +224,9 @@ function M.setup(theme, config)
     LspCodeLensSeparator                 = { link = "VirtualTextHint" },
     LspSignatureActiveParameter          = { link = "Search" },
     healthError                          = { link = "DiagnosticError" },
-    healthSuccess                        = { link = "AdachiGreenDark" },
+    healthSuccess                        = { link = "DiagnosticOk" },
     healthWarning                        = { link = "DiagnosticWarn" },
+    DiagnosticDeprecated = { theme.diagnostic.warn, theme.none, strikethrough = true }
   }
 
   if vim.fn.has('nvim-0.8.0') then
@@ -255,9 +291,43 @@ function M.setup(theme, config)
   end
 
   -- lsp
-  hl_groups['@lsp.type.namespace'] = { link = "TSNamespace" }
+  hl_groups['@none'] = { theme.fg }
 
-  hl_groups['@lsp.type.macro.rust'] = { theme.syntax.call }
+  hl_groups['@lsp.type.property'] = { link = 'TSField' }
+
+  hl_groups['@constructor.lua'] = { link = '@punctuation.bracket' }
+  hl_groups['@module.builtin.lua'] = { link = '@constant' }
+
+  hl_groups['@lsp.type.namespace'] = { link = "TSNamespace" }
+  hl_groups['@lsp.type.keyword.lua'] = { link = "TSKeyword" }
+
+  hl_groups['@tag.html'] = { theme.syntax.keyword }
+  hl_groups['@tag.delimiter.html'] = { theme.syntax.context }
+  hl_groups['@tag.attribute.html'] = { theme.fg0 }
+  hl_groups['@string.html'] = { theme.blue }
+
+  hl_groups['@lsp.type.macro.rust'] = { theme.syntax.macro }
+  hl_groups['@lsp.type.function'] = { theme.none }
+
+  -- fix lsp hover doc
+  hl_groups['@none.markdown'] = { theme.none, theme.none }
+  hl_groups['@text.emphasis'] = { theme.orange, italic = true }
+
+  -- hl_groups['@include.typescript'] = { theme.syntax.keyword }
+
+  hl_groups['markdownH1'] = { theme.purple }
+  hl_groups['markdownH2'] = { theme.green }
+  hl_groups['markdownH3'] = { theme.yellow }
+  hl_groups['markdownH4'] = { link = "markdownH1" }
+  hl_groups['markdownH5'] = { link = "markdownH2" }
+  hl_groups['markdownH6'] = { link = "markdownH3" }
+
+  hl_groups['@text.title.1.markdown'] = { link = 'markdownH1' }
+  hl_groups['@text.title.2.markdown'] = { link = 'markdownH2' }
+  hl_groups['@text.title.3.markdown'] = { link = 'markdownH3' }
+  hl_groups['@text.title.4.markdown'] = { link = 'markdownH4' }
+  hl_groups['@text.title.5.markdown'] = { link = 'markdownH5' }
+  hl_groups['@text.title.6.markdown'] = { link = 'markdownH6' }
 
   -- Telescope
   hl_groups['TelescopeMatching']       = { link = "Search" }
@@ -266,16 +336,71 @@ function M.setup(theme, config)
   hl_groups['TelescopeNormal']         = { theme.syntax.context }
   hl_groups['TelescopeSelectionCaret'] = { link = "TelescopeNormal" }
 
-  hl_groups['TelescopeBorder']        = { theme.bg2 }
+  hl_groups['TelescopeNormal']        = { link = "NormalFloat" }
+  hl_groups['TelescopeBorder']        = { link = "FloatBorder" }
   hl_groups['TelescopePromptBorder']  = { link = "TelescopeBorder" }
   hl_groups['TelescopeResultsBorder'] = { link = "TelescopeBorder" }
   hl_groups['TelescopePreviewBorder'] = { link = "TelescopeBorder" }
 
   -- GitSigns
-  hl_groups['GitGutterAdd']    = { link = "DiffAdd" }
-  hl_groups['GitGutterChange'] = { link = "DiffChange" }
-  hl_groups['GitGutterDelete'] = { link = "DiffDelete" }
+  hl_groups['GitGutterAdd']    = { theme.diff.add,    theme.sign }
+  hl_groups['GitGutterChange'] = { theme.diff.change, theme.sign }
+  hl_groups['GitGutterDelete'] = { theme.diff.delete, theme.sign }
   hl_groups['GitGutterChangeDelete'] = { link = 'GitGutterChange' }
+
+  -- Cmp
+  hl_groups['CmpItemMenu'] = { theme.syntax.constant, italic = true }
+  hl_groups['CmpSel'] = { link = "PmenuSel" }
+
+  hl_groups['CmpItemKindText']  = { theme.fg2 }
+  hl_groups['CmpItemKindMethod']  = { theme.syntax.constant }
+  hl_groups['CmpItemKindFunction']  = { theme.syntax.call }
+  hl_groups['CmpItemKindConstructor']  = { theme.syntax.type }
+  hl_groups['CmpItemKindField']  = { link = "TSField" }
+  hl_groups['CmpItemKindVariable']  = { theme.syntax.field }
+  hl_groups['CmpItemKindClass']  = { theme.syntax.type }
+  hl_groups['CmpItemKindInterface']  = { theme.syntax.type }
+  hl_groups['CmpItemKindModule']  = { theme.syntax.keyword }
+  hl_groups['CmpItemKindProperty']  = { theme.syntax.keyword }
+  hl_groups['CmpItemKindUnit']  = { theme.syntax.constant }
+  hl_groups['CmpItemKindValue']  = { theme.syntax.constant }
+  hl_groups['CmpItemKindEnum']  = { theme.syntax.constant }
+  hl_groups['CmpItemKindKeyword']  = { theme.syntax.keyword }
+  hl_groups['CmpItemKindSnippet']  = { theme.syntax.macro }
+  hl_groups['CmpItemKindColor']  = { theme.syntax.constant }
+  hl_groups['CmpItemKindFile']  = { theme.syntax.type }
+  hl_groups['CmpItemKindReference']  = { theme.fg0 }
+  hl_groups['CmpItemKindFolder']  = { theme.syntax.type }
+  hl_groups['CmpItemKindEnumMember']  = { theme.syntax.constant }
+  hl_groups['CmpItemKindConstant']  = { theme.syntax.constant }
+  hl_groups['CmpItemKindStruct']  = { theme.syntax.type }
+  hl_groups['CmpItemKindEvent']  = { theme.syntax.keyword }
+  hl_groups['CmpItemKindOperator']  = { link = "Operator" }
+  hl_groups['CmpItemKindTypeParameter']  = { theme.syntax.type }
+
+  hl_groups['CmpItemAbbrDeprecated'] = { link = "Comment" }
+
+  hl_groups['CmpItemAbbrMatch']      = { link = "Search" }
+  hl_groups['CmpItemAbbrMatchFuzzy'] = { link = "CmpItemAbbrMatch" }
+
+  -- lukas-reineke/indent-blankline.nvim
+  hl_groups['IndentBlanklineIndent1'] = { theme.bg2, nocombine = true }
+  hl_groups['IndentBlanklineIndent2'] = { theme.colors.red, nocombine = true }
+  hl_groups['IndentBlanklineIndent3'] = { theme.bg2, nocombine = true }
+  hl_groups['IndentBlanklineIndent4'] = { theme.colors.orange, nocombine = true }
+  hl_groups['IndentBlanklineIndent3'] = { theme.bg2, nocombine = true }
+  hl_groups['IndentBlanklineIndent4'] = { theme.colors.yellow, nocombine = true }
+  hl_groups['IndentBlanklineIndent5'] = { theme.bg2, nocombine = true }
+  hl_groups['IndentBlanklineIndent6'] = { theme.colors.green, nocombine = true }
+  hl_groups['IndentBlanklineIndent7'] = { theme.bg2, nocombine = true }
+  hl_groups['IndentBlanklineIndent8'] = { theme.colors.aqua, nocombine = true }
+  hl_groups['IndentBlanklineIndent9'] = { theme.bg2, nocombine = true }
+  hl_groups['IndentBlanklineIndent10'] = { theme.colors.blue, nocombine = true }
+  hl_groups['IndentBlanklineIndent11'] = { theme.bg2, nocombine = true }
+  hl_groups['IndentBlanklineIndent12'] = { theme.colors.purple, nocombine = true }
+
+  -- simrat39/symbols-outline.nvim
+  hl_groups['FocusedSymbol'] = { theme.syntax.call }
 
   if config.override_terminal then
     require 'aki.hl.terminal'(theme, theme.colors)

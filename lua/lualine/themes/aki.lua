@@ -2,8 +2,8 @@ local theme = require 'aki.colors'.setup {}
 
 local colors = {
   normal = theme.syntax.constant[1],
-  insert = theme.ike[1],
-  visual = theme.syntax.object[1],
+  insert = theme.syntax.annotation[1],
+  visual = theme.syntax.call[1],
 
   fg0 = theme.fg0[1],
   fg1 = theme.fg1[1],

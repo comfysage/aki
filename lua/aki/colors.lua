@@ -1,51 +1,28 @@
----@class Color { [1]: string, [2]: number }
+---@class aki.types.Color { [1]: string, [2]: number }
 
----@alias NeutralColor '0_hard' | '0' | '0_soft' | '1' | '2' | '3' | '4'
----@alias NeutralColors { [NeutralColor]: Color }
+---@alias aki.types.ColorField 'bg0_hard'|'bg0_soft'|'bg0'|'bg1'|'bg2'|'bg3'|'bg4'|'bg5'|'bg_visual'|'bg_red'|'bg_green'|'bg_blue'|'bg_yellow'|'fg0'|'fg1'|'fg2'|'red'|'orange'|'yellow'|'green'|'aqua'|'blue'|'purple'
+---@alias aki.types.Colors { [aki.types.ColorField]: aki.types.Color }
 
----@alias AccentColor '0' | '1' | '2' | '3'
----@alias AccentColors { [AccentColor]: Color }
-
----@class AkiColors
----@field bg NeutralColors
----@field fg NeutralColors
----@field sakura AccentColors
----@field ike AccentColors
----@field kumo AccentColors
-
----@type AkiColors
+---@type aki.types.Colors
 _G.aki_colors = {
-  bg = {
-    ['0_hard'] = { '#2A2A38', 0 },
-    ['0_soft'] = { '#1C1D34', 0 },
-    ['0']      = { '#252531', 0 },
-    ['1'] = { '#353547', 8 },
-    ['2'] = { '#414257', 8 },
-    ['3'] = { '#4B4C66', 8 },
-  },
-  fg = {
-    ['0'] = { '#EBEBE3', 0 },
-    ['1'] = { '#E6E6DD', 8 },
-    ['2'] = { '#DFDFD5', 8 },
-  },
-  sakura = {
-    ['0'] = { '#E6B87F', 0 },
-    ['1'] = { '#E69E87', 13 },
-    ['2'] = { '#CA797E', 0 },
-    ['3'] = { '#C982B4', 0 },
-  },
-  ike = {
-    ['0'] = { '#9AB7D2', 0 },
-    ['1'] = { '#ABD0D0', 12 },
-    ['2'] = { '#A7D0C1', 0 },
-    ['3'] = { '#9FD5AB', 0 },
-  },
-  kumo = {
-    ['0'] = { '#A1C3CC', 0 },
-    ['1'] = { '#ABADD0', 0 },
-    ['2'] = { '#AD8DBD', 0 },
-    ['3'] = { '#AF6672', 0 },
-  },
+  bg0_hard = { "#161720", 0 },
+  bg0      = { "#1D1E28", 0 },
+  bg0_soft = { "#252731", 0 },
+  bg1      = { "#2C2E39", 8 },
+  bg2      = { "#373946", 8 },
+  bg3      = { "#454856", 8 },
+  bg4      = { "#585B6E", 8 },
+  bg5      = { "#797EA3", 8 },
+  fg0      = { "#DADDEB", 7 },
+  fg1      = { "#CCD0E3", 7 },
+  fg2      = { "#A3ADD1", 7 },
+  red      = { "#CA6D73", 1 },
+  orange   = { "#E09F87", 11 },
+  yellow   = { "#E6C193", 3 },
+  green    = { "#B4C7A7", 2 },
+  aqua     = { "#9BC2B1", 6 },
+  blue     = { "#939DBD", 4 },
+  purple   = { "#AD8DBD", 5 },
 }
 
 local M = {}
@@ -54,10 +31,10 @@ function M.colors()
   return _G.aki_colors
 end
 
----@param config AkiConfig?
----@return AkiTheme
+---@param config aki.types.Config?
+---@return aki.types.Theme
 function M.setup(config)
-  ---@type AkiConfig
+  ---@type aki.types.Config
   config = vim.tbl_extend("force", _G.aki_config, config or {})
   return require 'aki.theme'.setup(M.colors(), config)
 end
