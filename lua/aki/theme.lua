@@ -94,7 +94,7 @@ function M.setup(colors, config)
   theme.syntax = {
     keyword = theme.red,
     object = theme.fg1,
-    field = theme.colors.bg5,
+    field = theme.fg1,
     type = theme.orange,
     context = theme.bg3,
     bracket = theme.fg2,

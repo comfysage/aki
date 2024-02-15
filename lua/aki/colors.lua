@@ -1,6 +1,6 @@
 ---@class aki.types.Color { [1]: string, [2]: number }
 
----@alias aki.types.ColorField 'bg0_hard'|'bg0_soft'|'bg0'|'bg1'|'bg2'|'bg3'|'bg4'|'bg5'|'bg_visual'|'bg_red'|'bg_green'|'bg_blue'|'bg_yellow'|'fg0'|'fg1'|'fg2'|'red'|'orange'|'yellow'|'green'|'aqua'|'blue'|'purple'
+---@alias aki.types.ColorField 'bg0_hard'|'bg0_soft'|'bg0'|'bg1'|'bg2'|'bg3'|'bg4'|'fg0'|'fg1'|'fg2'|'red'|'orange'|'yellow'|'green'|'aqua'|'blue'|'purple'
 ---@alias aki.types.Colors { [aki.types.ColorField]: aki.types.Color }
 
 ---@type aki.types.Colors
@@ -12,7 +12,6 @@ _G.aki_colors = {
   bg2      = { "#373946", 8 },
   bg3      = { "#454856", 8 },
   bg4      = { "#585B6E", 8 },
-  bg5      = { "#797EA3", 8 },
   fg0      = { "#DADDEB", 7 },
   fg1      = { "#CCD0E3", 7 },
   fg2      = { "#A3ADD1", 7 },
