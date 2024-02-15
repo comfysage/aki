@@ -78,7 +78,7 @@ function M.setup(colors, config)
   theme.fg1 = colors.fg1
   theme.fg2 = colors.fg2
 
-  local sign_colors = { dawn = theme.bg3 }
+  local sign_colors = { soft = theme.bg3 }
   theme.sign = sign_colors[config.theme] or theme.none
   theme.comment = colors.bg4
   theme.bg_accent = theme.bg2
