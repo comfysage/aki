@@ -1,13 +1,13 @@
 local aki = {}
 
----@class aki.types.Config
+---@class aki.types.config
 ---@field transparent_background boolean
 ---@field theme 'hard'|'medium'|'soft'
 ---@field override_terminal boolean
----@field style aki.types.StyleConfig
----@field overrides aki.types.HLGroups
+---@field style aki.types.styleconfig
+---@field overrides aki.types.hlgroups
 
----@type aki.types.Config
+---@type aki.types.config
 aki.default_config = {
     transparent_background = false,
     theme = 'medium',
@@ -22,16 +22,16 @@ aki.default_config = {
     overrides = {},
 }
 
----@type aki.types.Config
+---@type aki.types.config
 _G.aki_config = vim.tbl_deep_extend("force", aki.default_config, _G.aki_config or {})
 
----@param config aki.types.Config|table
+---@param config aki.types.config|table
 function aki.setup(config)
     _G.aki_config = vim.tbl_deep_extend("force", _G.aki_config, config or {})
 end
 
 ---@param group string
----@param colors aki.types.ColorSpec
+---@param colors aki.types.colorspec
 local function set_hi(group, colors)
     if not vim.tbl_isempty(colors) then
         ---@type vim.api.keyset.highlight
@@ -46,7 +46,7 @@ local function set_hi(group, colors)
     end
 end
 
----@param hlgroups aki.types.HLGroups
+---@param hlgroups aki.types.hlgroups
 local function set_highlights(hlgroups)
     vim.cmd("highlight Normal guifg=" .. hlgroups.Normal[1][1] .. " guibg=" .. hlgroups.Normal[2][1].. " ctermfg=" .. hlgroups.Normal[1][2] .. " ctermbg=" .. hlgroups.Normal[2][2])
     hlgroups.Normal = nil

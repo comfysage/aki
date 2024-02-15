@@ -1,9 +1,9 @@
----@class aki.types.Color { [1]: string, [2]: number }
+---@class aki.types.color { [1]: string, [2]: number }
 
----@alias aki.types.ColorField 'bg0_hard'|'bg0_soft'|'bg0'|'bg1'|'bg2'|'bg3'|'bg4'|'fg0'|'fg1'|'fg2'|'red'|'orange'|'yellow'|'green'|'aqua'|'blue'|'purple'
----@alias aki.types.Colors { [aki.types.ColorField]: aki.types.Color }
+---@alias aki.types.colorfield 'bg0_hard'|'bg0_soft'|'bg0'|'bg1'|'bg2'|'bg3'|'bg4'|'fg0'|'fg1'|'fg2'|'red'|'orange'|'yellow'|'green'|'aqua'|'blue'|'purple'
+---@alias aki.types.colors { [aki.types.colorfield]: aki.types.color }
 
----@type aki.types.Colors
+---@type aki.types.colors
 _G.aki_colors = {
   bg0_hard = { "#1A1B24", 0 },
   bg0      = { "#22232E", 0 },
@@ -30,10 +30,10 @@ function M.colors()
   return _G.aki_colors
 end
 
----@param config aki.types.Config?
----@return aki.types.Theme
+---@param config aki.types.config?
+---@return aki.types.theme
 function M.setup(config)
-  ---@type aki.types.Config
+  ---@type aki.types.config
   config = vim.tbl_extend("force", _G.aki_config, config or {})
   return require 'aki.theme'.setup(M.colors(), config)
 end

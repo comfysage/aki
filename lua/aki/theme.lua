@@ -1,56 +1,56 @@
----@class aki.types.StyleConfig
----@field tabline { reverse: boolean, color: aki.types.ColorField }
+---@class aki.types.styleconfig
+---@field tabline { reverse: boolean, color: aki.types.colorfield }
 ---@field search { reverse: boolean, inc_reverse: boolean }
 ---@field types { italic: boolean }
 ---@field keyword { italic: boolean }
 ---@field comment { italic: boolean }
 
----@class aki.types.Theme
----@field none aki.types.Color
----@field colors aki.types.Colors
----@field base { fg: aki.types.Color, bg: aki.types.Color }
----@field bg aki.types.Color
----@field fg aki.types.Color
----@field bg0 aki.types.Color
----@field bg1 aki.types.Color
----@field bg2 aki.types.Color
----@field bg3 aki.types.Color
----@field fg0 aki.types.Color
----@field fg1 aki.types.Color
----@field fg2 aki.types.Color
----@field red  aki.types.Color
----@field yellow aki.types.Color
----@field orange aki.types.Color
----@field green aki.types.Color
----@field aqua aki.types.Color
----@field blue aki.types.Color
----@field purple aki.types.Color
+---@class aki.types.theme
+---@field none aki.types.color
+---@field colors aki.types.colors
+---@field base { fg: aki.types.color, bg: aki.types.color }
+---@field bg aki.types.color
+---@field fg aki.types.color
+---@field bg0 aki.types.color
+---@field bg1 aki.types.color
+---@field bg2 aki.types.color
+---@field bg3 aki.types.color
+---@field fg0 aki.types.color
+---@field fg1 aki.types.color
+---@field fg2 aki.types.color
+---@field red  aki.types.color
+---@field yellow aki.types.color
+---@field orange aki.types.color
+---@field green aki.types.color
+---@field aqua aki.types.color
+---@field blue aki.types.color
+---@field purple aki.types.color
 ---@field syntax aki.types.Syntax
----@field diagnostic { ['ok'|'error'|'warn'|'info'|'hint']: aki.types.Color }
----@field diff { ['add'|'delete'|'change']: aki.types.Color }
----@field style aki.types.StyleConfig
----@field sign aki.types.Color
----@field comment aki.types.Color
----@field bg_accent aki.types.Color
+---@field diagnostic { ['ok'|'error'|'warn'|'info'|'hint']: aki.types.color }
+---@field diff { ['add'|'delete'|'change']: aki.types.color }
+---@field style aki.types.styleconfig
+---@field sign aki.types.color
+---@field comment aki.types.color
+---@field bg_accent aki.types.color
 
 ---@class aki.types.Syntax
----@field keyword aki.types.Color
----@field object aki.types.Color
----@field field aki.types.Color
----@field type aki.types.Color
----@field context aki.types.Color
----@field bracket aki.types.Color
----@field constant aki.types.Color
----@field call aki.types.Color
----@field string aki.types.Color
----@field macro aki.types.Color
----@field annotation aki.types.Color
+---@field keyword aki.types.color
+---@field object aki.types.color
+---@field field aki.types.color
+---@field type aki.types.color
+---@field context aki.types.color
+---@field bracket aki.types.color
+---@field constant aki.types.color
+---@field call aki.types.color
+---@field string aki.types.color
+---@field macro aki.types.color
+---@field annotation aki.types.color
 
 local M = {}
 
----@param colors aki.types.Colors
----@param config aki.types.Config
----@return aki.types.Theme
+---@param colors aki.types.colors
+---@param config aki.types.config
+---@return aki.types.theme
 function M.setup(colors, config)
   local theme = {}
 
